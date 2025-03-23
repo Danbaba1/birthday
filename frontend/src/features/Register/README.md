@@ -5,3 +5,5 @@
 #### Added RegisterForm Tests in the tests folder
 
 #### Added @testing-library/user-event to the dependencies
+
+#### react-toastify for notification messages

@@ -1,10 +1,11 @@
 import "../form.css";
 import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import apiClient from "../services/api-client";
 import { BaseSyntheticEvent, useState } from "react";
 import schema, { RegisterFormData } from "../helpers/validation";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegisterForm = () => {
   const [error, setError] = useState("");
@@ -12,7 +13,7 @@ const RegisterForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     reset,
   } = useForm<RegisterFormData>({ resolver: zodResolver(schema) });
 
@@ -23,8 +24,12 @@ const RegisterForm = () => {
       .then(() => {
         setError("");
         reset();
+        toast.success("Signup Successful!");
       })
-      .catch((error) => setError(error.message));
+      .catch((error) => {
+        setError(error.message);
+        toast.error("Signup Failed. Please try again.");
+      });
   };
 
   return (
@@ -35,9 +40,7 @@ const RegisterForm = () => {
 
       <form onSubmit={handleSubmit(onSubmit)} className="form" role="form">
         <p className="title">Register</p>
-        {error && <p className="err">{error}</p>}
         <p className="message">Signup now and get full access to our app.</p>
-        {isSubmitSuccessful && <p className="message">Signup Successful</p>}
         <div className="form-group">
           <label htmlFor="username" className="label">
             Username
@@ -95,6 +98,18 @@ const RegisterForm = () => {
           Already have an account? <a href="">Login</a>
         </p>
       </form>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };
