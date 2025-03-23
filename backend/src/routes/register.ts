@@ -1,7 +1,8 @@
 import express from "express";
-import User from "../Model/userModel";
-import addUser from "../Model/Tools/addUser";
+import User from "../models/user";
+import {addUser} from "../services/userServive";
 import bcrypt from "bcrypt";
+
 
 export const register = express.Router();
 
@@ -20,7 +21,7 @@ register.post("/", async (req, res) => {
     }
     const salt: any = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const user = new User({
+    const user:any = new User({
       username: username,
       email: email,
       password: hashedPassword,

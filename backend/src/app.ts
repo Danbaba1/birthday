@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import register from '../routes/registerRoute';
+import register from './routes/register';
 
 const app = express();
 app.use(express.urlencoded({extended:true}));

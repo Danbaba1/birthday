@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../../src/app";
 import addUser from "../../Model/Tools/addUser";
-import User from "../../Model/userModel";
+import User from "../../src/models/userModel";
 
 jest.mock("../../Model/Tools/addUser");
 

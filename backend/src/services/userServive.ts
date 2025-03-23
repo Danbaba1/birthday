@@ -1,17 +1,14 @@
-import validateUser from "./validateUser";
-import { IUser } from "./validateUser"; 
+import { validateUser } from "../utils/sample";
+import { IResult, IUser } from "../types/interfaces";
 
-interface IResult {
-  success: boolean;
-  error?: string;
-}
 
-async function addUser(user: IUser): Promise<IResult> {
+
+export async function addUser(user: IUser): Promise<IResult> {
   try {
     const result = await validateUser(user);
 
     if (result.error) {
-      const errorMessages =result.error.details.map(error=> error.message);
+      const errorMessages =result.error.details.map(error => error.message);
       throw new Error(errorMessages.join(", "))
     }
 
@@ -21,5 +18,3 @@ async function addUser(user: IUser): Promise<IResult> {
     return { success: false, error: error instanceof Error ? error.message : String(error) };;
   }
 }
-
-export default addUser;
