@@ -6,7 +6,7 @@ const app = express();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());
-app.use("/register",register);
+app.use("/api/auth/register",register);
 
 app.get('/', (_req, res) => {
   res.send('<h1>Server is running...</h1>');
