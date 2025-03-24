@@ -20,7 +20,7 @@ const RegisterForm = () => {
   const onSubmit = (data: FieldValues, e?: BaseSyntheticEvent) => {
     e?.preventDefault();
     axios
-      .post("http://localhost:3000/register", data)
+      .post("http://localhost:3000/api/register", data)
       .then(() => {
         setError("");
         reset();
