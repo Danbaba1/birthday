@@ -1,5 +1,6 @@
-import validateUser from "../../Model/Tools/validateUser";
-import { IUser } from "../../Model/Tools/validateUser";
+import {validateUser} from "../../src/utils/sample";
+import { IUser } from "../../src/types/interfaces";
+
 
 describe("User Validation", () => {
   it("should validate a correct user object", async () => {

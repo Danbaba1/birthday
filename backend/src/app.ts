@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
-import register from "./routes/registerRoute";
+import router from "./routes/auth";
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-app.use("/api/auth/register", register);
+app.use("/api", router);
 
 app.get("/", (_req, res) => {
 	res.send("<h1>Server is running...</h1>");

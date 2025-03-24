@@ -20,7 +20,7 @@ const RegisterForm = () => {
 	const onSubmit = (data: FieldValues, e?: BaseSyntheticEvent) => {
 		e?.preventDefault();
 		axios
-			.post("http://localhost:3000/register", data)
+			.post("http://localhost:3000/api/register", data)
 			.then(() => {
 				setError("");
 				reset();
@@ -29,7 +29,6 @@ const RegisterForm = () => {
 			.catch((error) => {
 				setError(error.message);
 				toast.error("Signup Failed. Please try again.");
-				console.log(data);
 			});
 	};
 
