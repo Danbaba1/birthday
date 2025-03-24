@@ -1,20 +1,26 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+dotenv.config();
+
+const SECRET_KEY = process.env.JWT_SECRET || "Go-mailer";
+
+export function authMiddleware (req: Request, res: Response, next: NextFunction) {
   const token = req.header("Authorization");
 
   if (!token) {
-    return res.status(401).json({ error: "Access denied" });
+    res.status(401).json({ error: "Access denied" });
+    return;
   }
 
   try {
-    const verified = jwt.verify(token, process.env.JWT_SECRET as string);
-    (req as any).user = verified; // Explicitly assign `user` to `req`
-    return next(); // Ensure next() is returned
+    const verified = jwt.verify(token, SECRET_KEY as string);
+    (req as any).user = verified; 
+    next(); 
   } catch (error) {
-    return res.status(400).json({ error: "Invalid token" });
+    res.status(401).json({ error: "Invalid token" });
+    return;
   }
 };
 
-export default authMiddleware;

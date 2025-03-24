@@ -15,11 +15,7 @@ const userSchema = new Schema<DBUser>({
   dob: { type: Date },
   gender: { type: String, trim: true, enum: ["male", "female"] },
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  friendRequests: [
-    {
-      userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
-    },
-  ],
+  friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   notifications: [
     {
       message: { type: String, required: true },
