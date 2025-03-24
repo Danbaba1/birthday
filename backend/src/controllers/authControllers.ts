@@ -1,40 +1,19 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '../Model/userModel';
-import validateUser from '../Model/Tools/validateUser';
+import User from '../models/user';
+import { addUser } from '../services/userService';
 
-export const registerUser = async (req: Request, res: Response): Promise<void> => {
+export const registerUser = async (req: Request, res: Response): Promise<void>=> {
   try {
-    const { error } = validateUser(req.body);
-    if (error) {
-      res.status(400).json({ error: error.details.map((d) => d.message) });
+    const result = await addUser(req.body);
+    if (!result.success) {
+      res.status(400).send(result.error);
       return;
     }
-
-    const { firstName, lastName, username, dob, email, password, gender } = req.body;
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-
-    if (existingUser) {
-      res.status(400).json({ error: 'Username or Email already exists' });
-      return;
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({
-      firstName,
-      lastName,
-      username,
-      dob,
-      email,
-      password: hashedPassword,
-      gender: gender.toLowerCase()
-    });
-    await newUser.save();
-
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).send("User registered successfully");
   } catch (error: any) {
-    res.status(500).json({ error: 'Server error', details: error.message });
+    res.status(500).send(error.message || "Internal Server Error");
   }
 };
 

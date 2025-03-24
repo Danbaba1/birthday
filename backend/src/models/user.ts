@@ -1,11 +1,11 @@
 import mongoose, { Schema } from "mongoose";
-import { IUser } from "../utils/sample";
+import { DBUser } from "../types/interfaces";
 
 
 // Define TypeScript Interface for User Document
 
 
-const userSchema = new Schema<IUser>({
+const userSchema = new Schema<DBUser>({
   firstName: { type: String, trim: true },
   lastName: { type: String, trim: true },
   username: { type: String, required: true, unique: true, trim: true, lowercase: true },
@@ -31,7 +31,7 @@ const userSchema = new Schema<IUser>({
   createdAt: { type: Date, default: Date.now },
 });
 
-const User = mongoose.model<IUser>("User", userSchema);
+const User = mongoose.model<DBUser>("User", userSchema);
 
 export default User;
 

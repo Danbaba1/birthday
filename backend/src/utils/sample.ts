@@ -1,11 +1,6 @@
 import Joi from "joi";
+import { IUser } from "types/interfaces";
 
-export interface IUser {
-  email: string;
-  username: string;
-  password: string;
-  [key: string]: any; // Allows additional unknown properties
-}
 
 export function validateUser(user: IUser) {
   const Schema = Joi.object({

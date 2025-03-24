@@ -5,7 +5,7 @@ export interface IResult {
   error?: string;
 }
 
-export interface IUser extends Document {
+export interface DBUser extends Document {
   firstName: string;
   lastName: string;
   username: string;
@@ -25,4 +25,11 @@ export interface IUser extends Document {
   }[];
   lastLogin?: Date;
   createdAt: Date;
+}
+
+export interface IUser {
+  email: string;
+  username: string;
+  password: string;
+  [key: string]: any; // Allows additional unknown properties
 }
