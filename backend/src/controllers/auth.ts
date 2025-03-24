@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
-import { addUser } from '../services/userService';
+import { addUser } from '../services/user';
 import dotenv from "dotenv";
-import { sendFriendRequest, acceptFriendRequest, rejectFriendRequest, removeFriend } from '../services/friendService';
+import { sendFriendRequest, acceptFriendRequest, rejectFriendRequest, removeFriend } from '../services/friend';
 
 dotenv.config();
 

@@ -8,7 +8,7 @@ export const sendFriendRequest = async (senderId: any, receiverId: any) => {
     return { success: false, error: "User not found" };
   }
   if (
-    receiver.friendRequests.includes(senderId.toString()) ||
+    receiver.friendRequests.includes(senderId) ||
     receiver.friends.includes(senderId)
   ) {
     return { success: false, error: "Friend request already sent" };

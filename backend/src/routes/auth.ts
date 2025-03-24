@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import asyncHandler from 'express-async-handler';
-import { registerUser, loginUser, controlSendFriendRequest, controlAcceptFriendRequest, controlRejectFriendRequest, controlRemoveFriend } from '../controllers/authControllers';
-import { authMiddleware } from '../middleware/authMiddleware';
+import { registerUser, loginUser, controlSendFriendRequest, controlAcceptFriendRequest, controlRejectFriendRequest, controlRemoveFriend } from '../controllers/auth';
+import { authMiddleware } from '../middleware/auth';
 
 
 const router = Router();
