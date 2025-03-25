@@ -42,7 +42,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }) as { _id: string; password: string };
 
     if (!user) {
       res.status(400).json({ error: 'Invalid email or password' });
@@ -57,7 +57,14 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
 
-    res.json({ token });
+    res.setHeader('Authorization', `Bearer ${token}`);
+    res.setHeader('User-Id', user._id);
+
+    res.status(200).json({ 
+      message: "Login successful",
+      token, 
+      userId: user._id
+    });
   } catch (error: any) {
     res.status(500).json({ error: 'Server error', details: error.message });
   }
