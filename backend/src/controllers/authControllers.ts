@@ -38,27 +38,25 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
   }
 };
 
-
-
 export const loginUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { identifier, password } = req.body;
-    const user = await User.findOne({
-      $or: [{ email: identifier }, { username: identifier }]
-    });
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
 
     if (!user) {
-      res.status(400).json({ error: 'Invalid credentials' });
+      res.status(400).json({ error: 'Invalid email or password' });
       return;
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      res.status(400).json({ error: 'Invalid credentials' });
+      res.status(400).json({ error: 'Invalid email or password' });
       return;
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
+
     res.json({ token });
   } catch (error: any) {
     res.status(500).json({ error: 'Server error', details: error.message });
