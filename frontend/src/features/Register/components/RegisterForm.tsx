@@ -6,9 +6,11 @@ import schema, { RegisterFormData } from "../helpers/validation";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const {
     register,
@@ -95,7 +97,10 @@ const RegisterForm = () => {
         </div>
         <button type="submit">Submit</button>
         <p className="signin">
-          Already have an account? <a href="">Login</a>
+          Already have an account?{" "}
+          <span className="signup-link" onClick={() => navigate("/login")}>
+            Login
+          </span>
         </p>
       </form>
 
