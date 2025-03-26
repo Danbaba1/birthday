@@ -6,7 +6,9 @@ import users from "./routes/users";
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors()
+);
 app.use("/api", router);
 app.use("/api/users", users);
 
