@@ -24,30 +24,24 @@ p {
   color: initial;
 }
 
-/* Members */
-.members-container {
-  display: flex;
+@media (min-width: 768px) {
+  .large-screens{
+    text-align: center;
+    padding: 1.25rem;
+  }
+
+  .members-wrapper{
+    display: none;
+  }
 }
 
-.members-wrapper {
-  border-left: 0.0625rem solid grey;
-  height: 96vh;
-  padding-left: 1.25rem;
-  padding-top: 2rem;
-}
-
-/* .sidebar-wrapper {
-  width: 20%;
-  padding-left: 1.25rem;
-  padding-top: 2rem;
-} */
-
-.members {
-  flex: 1;
-}
 
 /* Mobile screens */
 @media (max-width: 768px) {
+  .large-screens{
+    display: none;
+  }
+
   .members-container {
     display: flex;
     flex-direction: column;

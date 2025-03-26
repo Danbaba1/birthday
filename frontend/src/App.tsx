@@ -11,6 +11,9 @@ import LoginForm from "./features/Login/LoginForm";
 function App() {
   return (
     <Router>
+      <h3 className="large-screens">
+        This app is unavailable for large screens. Please use a mobile device.
+      </h3>
       <div className="members-container">
         <Sidebar />
         <div className="members-wrapper">
