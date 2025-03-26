@@ -9,7 +9,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     try {
-      fetch("/api/friends/requests")
+      fetch("/api/friendRequest/send")
         .then((res) => res.json())
         .then((data) => setFriendRequests(data))
         .catch((error) => console.error("Error fetching friend requests:", error));
@@ -26,7 +26,7 @@ const UserProfile = () => {
 
   const handleAcceptRequest = async (friendId: string) => {
     try {
-      const response = await fetch(`/api/friends/accept/${friendId}`, {
+      const response = await fetch(`/api/friendRequest/accept/${friendId}`, {
         method: "POST",
       });
 
