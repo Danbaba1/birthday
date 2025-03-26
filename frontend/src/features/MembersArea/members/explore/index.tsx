@@ -1,8 +1,9 @@
-import "./explore.css";
+import React from 'react'
+
 export default function Explore() {
   return (
     <div>
-      <h1>Explore All Other Users profile</h1>
+      exploreeee hehehehe
     </div>
-  );
+  )
 }

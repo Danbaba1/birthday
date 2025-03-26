@@ -25,20 +25,19 @@ p {
 }
 
 @media (min-width: 768px) {
-  .large-screens{
+  .large-screens {
     text-align: center;
     padding: 1.25rem;
   }
 
-  .members-wrapper{
+  .members-wrapper {
     display: none;
   }
 }
 
-
 /* Mobile screens */
 @media (max-width: 768px) {
-  .large-screens{
+  .large-screens {
     display: none;
   }
 

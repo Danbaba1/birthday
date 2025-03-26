@@ -43,10 +43,12 @@ export default function Sidebar() {
               <p className="search-text">Profile</p>
             </div>
           </Link>
+          <Link to='/search' className="link">
           <div className="content-gap" onClick={closeMenu}>
             <CiSearch className="mem-icons" />
             <p className="search-text">Search</p>
           </div>
+          </Link>
           <div className="content-gap" onClick={closeMenu}>
             <IoIosNotificationsOutline className="mem-icons" />
             <p className="search-text">Notifications</p>
