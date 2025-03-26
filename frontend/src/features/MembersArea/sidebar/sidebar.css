@@ -1,85 +1,99 @@
-.content-gap {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  width: 90%;
-  padding: 0.625rem;
-}
+@media (min-width: 768px) {
+  nav {
+    display: none;
+  }
 
-.content-gap:hover {
-  background-color: lightgrey;
-  border-radius: 0.625rem /* 10px -> .625rem */;
-  transition: ease-in 0.3s;
-}
-
-.mem-icons {
-  font-size: 2.5rem;
-}
-
-.search-text {
-  font-size: 1.5rem;
-}
-
-.logo {
-  cursor: pointer;
-  width: 20%;
-  text-align: center;
-  font-family: cursive;
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 2rem;
-}
-
-.sidebar-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-top: 3.75rem;
-}
-
-.log-out {
-  cursor: pointer;
-  font-size: 1.25rem;
-  font-weight: bold;
-  padding-left: 1.25rem;
+  .sidebar-content {
+    display: none;
+  }
 }
 
 /* Mobile screens */
-@media (max-width: 760px) {
-  .sidebar-content {
+@media (max-width: 768px) {
+  nav {
+    position: relative;
+    background-color: grey;
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    margin: 0;
-    gap: 0.625rem;
-    padding-right: 1rem;
+    padding: 0 0.625rem;
+    height: 2.5rem;
+  }
+
+  .sidebar-content {
+    position: fixed;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: grey;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    padding-left: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    width: 40%;
+    height: 90%;
+    animation: slideIn 1s both;
+    transition: 2s ease-out;
   }
 
   .logo {
-    font-size: 1.25rem;
-    line-height: 1rem;
+    font-size: 0.875rem;
+    line-height: 0.625rem;
     width: 10%;
   }
 
-  .content-gap {
-    padding: 0;
-    gap: 0.625rem;
-  }
-
-  .mem-icons {
+  .menu {
+    cursor: pointer;
     font-size: 1.25rem;
   }
 
   .search-text {
-    display: none;
+    cursor: pointer;
+    font-size: 0.875rem;
   }
 
-  #home {
-    display: none;
+  .content-gap {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 0.3125rem;
+    gap: 0.625rem;
+  }
+
+  .content-gap:hover {
+    background-color: lightgrey;
+    color: black;
+    border-radius: 0.625rem /* 10px -> .625rem */;
+    transition: ease-in 0.3s;
+  }
+
+  .mem-icons {
+    cursor: pointer;
+    font-size: 1.25rem;
   }
 
   .log-out {
-    display: none;
+    cursor: pointer;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding-left: 1.25rem;
+  }
+
+  .log-out:hover {
+    color: black;
+    transition: 0.3s ease-in;
+  }
+}
+
+/* keyframes */
+@keyframes slideIn {
+  from {
+    left: -40%;
+  }
+
+  to {
+    left: 0%;
   }
 }

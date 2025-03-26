@@ -11,16 +11,16 @@ import LoginForm from "./features/Login/LoginForm";
 function App() {
   return (
     <Router>
-      <div className='members-container'>
+      <div className="members-container">
         <Sidebar />
-        <div className='members-wrapper'>
+        <div className="members-wrapper">
           <Routes>
-            <Route path='/' element={<Members />} />
-            <Route path='/register' element={<RegisterForm />} />
+            <Route path="/" element={<Members />} />
+            <Route path="/register" element={<RegisterForm />} />
             {/* <Route path="/user-search" element={<Search />} /> */}
-            <Route path='/explore' element={<Explore />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/login' element={<LoginForm />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<LoginForm />} />
           </Routes>
         </div>
       </div>

@@ -26,48 +26,48 @@ const LoginForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className='form' role='form'>
-        <p className='title'>Login</p>
-        <p className='message'>Login to access to our app.</p>
+      <form onSubmit={handleSubmit(onSubmit)} className="form" role="form">
+        <p className="title">Login</p>
+        <p className="message">Login to access to our app.</p>
 
-        <div className='form-group'>
-          <label htmlFor='email' className='label'>
+        <div className="form-group">
+          <label htmlFor="email" className="label">
             Email
           </label>
           <input
             {...register("email")}
-            id='email'
-            type='email'
-            className='form-input'
+            id="email"
+            type="email"
+            className="form-input"
           />
-          {errors.email && <p className='err'>{errors.email.message}</p>}
+          {errors.email && <p className="err">{errors.email.message}</p>}
         </div>
-        <div className='form-group'>
-          <label htmlFor='password' className='label'>
+        <div className="form-group">
+          <label htmlFor="password" className="label">
             Password
           </label>
           <input
             {...register("password")}
-            id='password'
-            type='password'
-            className='form-input'
-            data-testid='password'
+            id="password"
+            type="password"
+            className="form-input"
+            data-testid="password"
           />
-          {errors.password && <p className='err'>{errors.password.message}</p>}
+          {errors.password && <p className="err">{errors.password.message}</p>}
         </div>
-        <button type='submit' disabled={isSubmitting}>
+        <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Logging in..." : "Login"}
         </button>
-        <p className='signin'>
+        <p className="signin">
           Don't have an account?
-          <span className='signup-link' onClick={() => navigate("/register")}>
+          <span className="signup-link" onClick={() => navigate("/register")}>
             Sign Up
           </span>
         </p>
       </form>
 
       <ToastContainer
-        position='top-right'
+        position="top-right"
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
