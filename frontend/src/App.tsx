@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Explore from "./features/MembersArea/members/explore";
 import Sidebar from "./features/MembersArea/sidebar/index";
 import Profile from "./features/MembersArea/members/profile/profile";
+import OtherUserProfile from "./features/MembersArea/members/profile/OtherUserProfile";
 import RegisterForm from "./features/Register/components/RegisterForm";
 import "./app.css";
 
@@ -18,6 +19,7 @@ function App() {
             {/* <Route path="/user-search" element={<Search />} /> */}
             <Route path="/explore" element={<Explore />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:userId" element={<OtherUserProfile />} />
           </Routes>
         </div>
       </div>
