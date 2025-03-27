@@ -6,7 +6,7 @@ import schema, { RegisterFormData } from "../helpers/validation";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
 	const navigate = useNavigate();
@@ -92,7 +92,9 @@ const RegisterForm = () => {
 						<p className='err'>{errors.passwordConfirm.message}</p>
 					)}
 				</div>
-				<button type='submit'>Submit</button>
+				<Link to='/login' className='link'>
+					<button type='submit'>Submit</button>
+				</Link>
 				<p className='signin'>
 					Already have an account?{" "}
 					<span className='signup-link' onClick={() => navigate("/login")}>
