@@ -24,6 +24,7 @@ export interface DBUser extends Document {
     type: "birthday"|"AcceptedRequest"|"ReceivedRequest";
     isRead: boolean;
     createdAt: Date;
+    relatedUser:string;
   }[];
   lastLogin?: Date;
   createdAt: Date;

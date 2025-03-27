@@ -23,6 +23,7 @@ const userSchema = new Schema<DBUser>({
       type: {type: String, trim: true, enum: ["birthday","AcceptedRequest","ReceivedRequest"]},
       isRead: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now },
+      relatedUser: {type: String}
     },
   ],
   lastLogin: { type: Date },
