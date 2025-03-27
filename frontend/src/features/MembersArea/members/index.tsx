@@ -1,9 +1,7 @@
-import "./members.css";
-
 export default function Members() {
-  return (
+ return (
     <div>
-      <h1>Display All User friends</h1>
+     <h1>members</h1>
     </div>
   );
 }

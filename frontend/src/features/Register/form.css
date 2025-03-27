@@ -37,7 +37,8 @@ form {
   text-align: center;
 }
 
-.signin a {
+.signin a,
+.signup-link {
   color: #1ab188;
   text-decoration: none;
   transition: 0.3s;
