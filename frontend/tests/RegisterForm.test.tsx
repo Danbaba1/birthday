@@ -1,117 +1,153 @@
 import { render, screen, cleanup } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import {
+	describe,
+	it,
+	expect,
+	vi,
+	beforeEach,
+	beforeAll,
+	afterEach,
+	afterAll,
+} from "vitest";
 import "@testing-library/jest-dom/vitest";
 import userEvent from "@testing-library/user-event";
+import { server } from "./mocks/server";
+import { MemoryRouter } from "react-router-dom";
 import RegisterForm from "../src/features/Register/components/RegisterForm";
 
 const renderForm = () => {
-  render(<RegisterForm />);
+	render(
+		<MemoryRouter>
+			<RegisterForm />
+		</MemoryRouter>
+	);
 
-  return {
-    waitForFormToLoad: () => screen.findByRole("form"),
-    getInput: () => {
-      return {
-        username: screen.getByLabelText(/username/i),
-        email: screen.getByLabelText(/email/i),
-        password: screen.getByTestId("password"),
-        passwordConfirm: screen.getByTestId("passwordConfirm"),
-        submitButton: screen.getByRole("button"),
-      };
-    },
-  };
+	return {
+		waitForFormToLoad: async () => {
+			const form = await screen.findByRole("form");
+			return {
+				form: form,
+				username: screen.getByLabelText(/username/i),
+				email: screen.getByLabelText(/email/i),
+				password: screen.getByTestId("password"),
+				passwordConfirm: screen.getByTestId("passwordConfirm"),
+				submitButton: screen.getByRole("button"),
+			};
+		},
+	};
 };
 
 describe("RegisterForm", () => {
-  afterEach(() => {
-    cleanup();
-  });
+	beforeEach(() => {
+		vi.clearAllMocks();
+	});
 
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
+	beforeAll(() => server.listen());
 
-  it("should render", async () => {
-    const { waitForFormToLoad, getInput } = renderForm();
+	afterEach(() => {
+		server.resetHandlers;
+		cleanup();
+	});
 
-    const form = await waitForFormToLoad();
-    const { username, email, password, passwordConfirm, submitButton } =
-      getInput();
+	afterAll(() => server.close());
 
-    expect(form).toBeInTheDocument();
-    expect(screen.getByText(/register/i)).toBeInTheDocument();
-    expect(username).toBeInTheDocument();
-    expect(email).toBeInTheDocument();
-    expect(password).toBeInTheDocument();
-    expect(passwordConfirm).toBeInTheDocument();
+	it("should render", async () => {
+		const { waitForFormToLoad } = renderForm();
 
-    expect(submitButton).toBeInTheDocument();
-    expect(submitButton).toHaveTextContent(/submit/i);
-  });
+		const { form, username, email, password, passwordConfirm, submitButton } =
+			await waitForFormToLoad();
 
-  it("should display an error message if the form name is missing", async () => {
-    const { waitForFormToLoad, getInput } = renderForm();
+		expect(form).toBeInTheDocument();
+		expect(screen.getByText(/register/i)).toBeInTheDocument();
+		expect(username).toBeInTheDocument();
+		expect(email).toBeInTheDocument();
+		expect(password).toBeInTheDocument();
+		expect(passwordConfirm).toBeInTheDocument();
+		expect(submitButton).toBeInTheDocument();
+		expect(submitButton).toHaveTextContent(/submit/i);
+	});
 
-    await waitForFormToLoad();
-    const user = userEvent.setup();
-    const { email, password, passwordConfirm, submitButton } = getInput();
-    // await user.type(username, "user");
-    await user.type(email, "user@gmail.com");
-    await user.type(password, "Password@123");
-    await user.type(passwordConfirm, "Password@123");
-    await user.click(submitButton);
+	it.each([
+		{
+			scenario: "missing or too short",
+			errorMessage: /at least 3/i,
+		},
+		{
+			scenario: "too long",
+			name: "a".repeat(31),
+			errorMessage: /more than 30/i,
+		},
+	])(
+		"should display an error message if the form name is $scenario",
+		async ({ name, errorMessage }) => {
+			const { waitForFormToLoad } = renderForm();
 
-    expect(
-      await screen.findByText(/username must be at least 3 characters/i),
-    ).toBeInTheDocument();
-  });
+			const { username, email, password, passwordConfirm, submitButton } =
+				await waitForFormToLoad();
+			const user = userEvent.setup();
+			if (name !== undefined) await user.type(username, name);
+			await user.type(email, "user@gmail.com");
+			await user.type(password, "Password@123");
+			await user.type(passwordConfirm, "Password@123");
+			await user.click(submitButton);
 
-  it("should display an error message if the email is invalid", async () => {
-    const { waitForFormToLoad, getInput } = renderForm();
+			expect(await screen.findByText(errorMessage)).toBeInTheDocument();
+		}
+	);
 
-    await waitForFormToLoad();
-    const user = userEvent.setup();
-    const { username, password, passwordConfirm, submitButton } = getInput();
-    await user.type(username, "user");
-    // await user.type(email, "user@gmail.com");
-    await user.type(password, "Password@123");
-    await user.type(passwordConfirm, "Password@123");
-    await user.click(submitButton);
+	it("should display an error message if the email is invalid", async () => {
+		const { waitForFormToLoad } = renderForm();
 
-    expect(await screen.findByText(/invalid email/i)).toBeInTheDocument();
-  });
+		const { username, password, passwordConfirm, submitButton } =
+			await waitForFormToLoad();
+		const user = userEvent.setup();
+		await user.type(username, "user");
+		// await user.type(email, "user@gmail.com");
+		await user.type(password, "Password@123");
+		await user.type(passwordConfirm, "Password@123");
+		await user.click(submitButton);
 
-  it("should display an error message if the password is missing", async () => {
-    const { waitForFormToLoad, getInput } = renderForm();
+		expect(await screen.findByText(/invalid email/i)).toBeInTheDocument();
+	});
 
-    await waitForFormToLoad();
-    const user = userEvent.setup();
-    const { username, email, passwordConfirm, submitButton } = getInput();
-    await user.type(username, "user");
-    await user.type(email, "user@gmail.com");
-    // await user.type(password, "Password@123");
-    await user.type(passwordConfirm, "Password@123");
-    await user.click(submitButton);
+	it("should display an error message if the password is missing", async () => {
+		const { waitForFormToLoad } = renderForm();
 
-    expect(
-      await screen.findByText(/password must be at least 8 characters/i),
-    ).toBeInTheDocument();
-  });
+		const { username, email, passwordConfirm, submitButton } =
+			await waitForFormToLoad();
+		const user = userEvent.setup();
+		await user.type(username, "user");
+		await user.type(email, "user@gmail.com");
+		// await user.type(password, "Password@123");
+		await user.type(passwordConfirm, "Password@123");
+		await user.click(submitButton);
 
-  it("should display an error message if the both passwords do not match", async () => {
-    const { waitForFormToLoad, getInput } = renderForm();
+		expect(
+			await screen.findByText(/password must be at least 8 characters/i)
+		).toBeInTheDocument();
+	});
 
-    await waitForFormToLoad();
-    const user = userEvent.setup();
-    const { username, email, password, passwordConfirm, submitButton } =
-      getInput();
-    await user.type(username, "user");
-    await user.type(email, "user@gmail.com");
-    await user.type(password, "Password@1234");
-    await user.type(passwordConfirm, "Password@123");
-    await user.click(submitButton);
+	it("should display an error message if the both passwords do not match", async () => {
+		const { waitForFormToLoad } = renderForm();
 
-    expect(
-      await screen.findByText(/passwords do not match/i),
-    ).toBeInTheDocument();
-  });
+		const { username, email, password, passwordConfirm, submitButton } =
+			await waitForFormToLoad();
+		const user = userEvent.setup();
+		await user.type(username, "user");
+		await user.type(email, "user@gmail.com");
+		await user.type(password, "Password@1234");
+		await user.type(passwordConfirm, "Password@123");
+		await user.click(submitButton);
+
+		expect(
+			await screen.findByText(/passwords do not match/i)
+		).toBeInTheDocument();
+	});
+
+	it("should display success on submit", async () => {
+		const response = await fetch("/register", { method: "POST" });
+		const data = await response.json();
+		console.log(data);
+		expect(data).toMatch(/success/i);
+	});
 });
