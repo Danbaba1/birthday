@@ -18,7 +18,9 @@ const userSchema = new Schema<DBUser>({
   friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   notifications: [
     {
+      id: {type: Number},
       message: { type: String, required: true },
+      type: {type: String, trim: true, enum: ["birthday","AcceptedRequest","ReceivedRequest"]},
       isRead: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now },
     },
