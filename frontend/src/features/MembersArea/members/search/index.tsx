@@ -22,8 +22,8 @@ export default function Search() {
     } else {
       setFilteredUsers(
         users.filter((user) =>
-          user.username.toLowerCase().includes(query.toLowerCase())
-        )
+          user.username.toLowerCase().includes(query.toLowerCase()),
+        ),
       );
     }
   }, [query, users]);

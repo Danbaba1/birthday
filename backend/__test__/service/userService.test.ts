@@ -1,5 +1,5 @@
-import { addUser } from "../../src/services/userService";
-import { validateUser } from "../../src/utils/sample";
+import {addUser} from "../../src/services/user";
+import {validateUser} from "../../src/utils/sample";
 import { IUser } from "../../src/types/interfaces";
 import User from "../../src/models/user";
 // import mongoose from "mongoose";

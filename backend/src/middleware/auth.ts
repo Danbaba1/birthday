@@ -9,7 +9,7 @@ const SECRET_KEY = process.env.JWT_SECRET || "Go-mailer";
 export function authMiddleware(
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   const token = req.header("Authorization");
 
