@@ -6,6 +6,7 @@ import { GoHome } from "react-icons/go";
 import { Link } from "react-router-dom";
 import "./sidebar.css";
 import { useState } from "react";
+import Logout from "../../../components/LogOut";
 
 export default function Sidebar() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -59,7 +60,9 @@ export default function Sidebar() {
               <p className="search-text">Explore</p>
             </div>
           </Link>
-          <p className="log-out">Log Out</p>
+          <div className="content-gap" onClick={closeMenu}>
+            <Logout />
+          </div>
         </div>
       ) : null}
     </div>
