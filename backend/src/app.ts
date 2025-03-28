@@ -13,7 +13,7 @@ app.use("/api", router);
 app.use("/api/users", users);
 
 app.get("/", (_req, res) => {
-	res.send("<h1>Server is running...</h1>");
+  res.send("<h1>Server is running...</h1>");
 });
 
 export default app;
