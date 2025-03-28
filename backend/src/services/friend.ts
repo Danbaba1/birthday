@@ -54,7 +54,9 @@ export const rejectFriendRequest = async (userId: any, friendId: any) => {
   if (!user.friendRequests.includes(friendId)) {
     return { success: false, error: "No friend request found" };
   }
-  user.friendRequests = user.friendRequests.filter((_id)=>(_id.toString()!==friendId));
+  user.friendRequests = user.friendRequests.filter(
+    (_id) => _id.toString() !== friendId,
+  );
   await user.save();
   return { success: true };
 };
@@ -68,9 +70,9 @@ export const removeFriend = async (userId: any, friendId: any) => {
   if (!user.friends.includes(friendId)) {
     return { success: false, error: "Friend not found" };
   }
-  
-  user.friends = user.friends.filter((_id)=>(_id.toString()!==friendId));
-  friend.friends = friend.friends.filter((_id)=>(_id.toString()!==userId));
+
+  user.friends = user.friends.filter((_id) => _id.toString() !== friendId);
+  friend.friends = friend.friends.filter((_id) => _id.toString() !== userId);
   await user.save();
   await friend.save();
   return { success: true };
