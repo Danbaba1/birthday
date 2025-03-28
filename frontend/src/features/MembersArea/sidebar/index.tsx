@@ -4,8 +4,8 @@ import { MdOutlineExplore } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { GoHome } from "react-icons/go";
 import { Link } from "react-router-dom";
-import "./sidebar.css";
 import { useState } from "react";
+import "./sidebar.css";
 
 export default function Sidebar() {
   const [openMenu, setOpenMenu] = useState(false);

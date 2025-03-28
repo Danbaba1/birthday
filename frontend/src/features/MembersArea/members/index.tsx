@@ -10,7 +10,7 @@ export default function Members() {
       <Sidebar />
       <div className="members-wrapper">
         <Routes>
-          <Route path="search" element={<Search />} /> {/* ✅ Ensure paths don't start with `/` */}
+          <Route path="search" element={<Search />} />
           <Route path="explore" element={<Explore />} />
           <Route path="profile" element={<Profile />} />
         </Routes>
