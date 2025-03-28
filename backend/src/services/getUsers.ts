@@ -5,7 +5,7 @@ class UserService {
     return await User.find()
       .populate("friends", "username firstName lastName -_id")
       .populate("friendRequests")
-      .select("-_id -password -notifications -createdAt -__v")
+      .select(" -password -notifications -createdAt -__v")
       .sort("username");
   }
 
@@ -13,7 +13,7 @@ class UserService {
     return await User.findById(id)
       .populate("friends", "username firstName lastName -_id")
       .populate("friendRequests")
-      .select("-_id -password -notifications -createdAt -__v");
+      .select(" -password -notifications -createdAt -__v");
   }
 
   async findUserProfileById(id: string, includeDob: boolean) {

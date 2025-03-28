@@ -32,11 +32,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <>
-      <div className="large-screen">
-        This app is unavailable for large screens. Please use a mobile device.
-      </div>
-
+    <div className="form_wrapper">
       <form onSubmit={handleSubmit(onSubmit)} className="form" role="form">
         <p className="title">Register</p>
         <p className="message">Signup now and get full access to our app.</p>
@@ -92,7 +88,7 @@ const RegisterForm = () => {
             <p className="err">{errors.passwordConfirm.message}</p>
           )}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" className="form_btn">Submit</button>
         <p className="signin">
           Already have an account?{" "}
           <span className="signup-link" onClick={() => navigate("/login")}>
@@ -112,7 +108,7 @@ const RegisterForm = () => {
         draggable
         pauseOnHover
       />
-    </>
+    </div>
   );
 };
 

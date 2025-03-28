@@ -1,16 +1,24 @@
-import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import User from '../models/user';
-import { addUser } from '../services/user';
+import { Request, Response } from "express";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import User from "../models/user";
+import { addUser } from "../services/user";
 import dotenv from "dotenv";
-import { sendFriendRequest, acceptFriendRequest, rejectFriendRequest, removeFriend } from '../services/friend';
+import {
+  sendFriendRequest,
+  acceptFriendRequest,
+  rejectFriendRequest,
+  removeFriend,
+} from "../services/friend";
 
 dotenv.config();
 
 const SECRET_KEY = process.env.JWT_SECRET || "Go-mailer";
 
-export const registerUser = async (req: Request, res: Response): Promise<void>=> {
+export const registerUser = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   try {
     const result = await addUser(req.body);
     if (!result.success) {
@@ -53,16 +61,19 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
       userId: user._id
     });
   } catch (error: any) {
-    res.status(500).json({ error: 'Server error', details: error.message });
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 };
 
-export const controlSendFriendRequest = async (req: Request, res: Response): Promise<void> => {
+export const controlSendFriendRequest = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   try {
     const senderId = (req as any).user.userId;
-    const {receiverId} = req.body;
+    const { receiverId } = req.body;
     const result = await sendFriendRequest(senderId, receiverId);
-    if(!result.success){
+    if (!result.success) {
       res.status(400).send(result.error);
       return;
     }
@@ -72,12 +83,15 @@ export const controlSendFriendRequest = async (req: Request, res: Response): Pro
   }
 };
 
-export const controlAcceptFriendRequest = async (req: Request, res: Response): Promise<void> => {
+export const controlAcceptFriendRequest = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   try {
     const userId = (req as any).user.userId;
-    const {friendId} = req.body;
+    const { friendId } = req.body;
     const result = await acceptFriendRequest(userId, friendId);
-    if(!result.success){
+    if (!result.success) {
       res.status(400).send(result.error);
       return;
     }
@@ -89,12 +103,15 @@ export const controlAcceptFriendRequest = async (req: Request, res: Response): P
   }
 };
 
-export const controlRejectFriendRequest = async (req: Request, res: Response): Promise<void> => {
+export const controlRejectFriendRequest = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   try {
     const userId = (req as any).user.userId;
-    const {friendId} = req.body;
+    const { friendId } = req.body;
     const result = await rejectFriendRequest(userId, friendId);
-    if(!result.success){
+    if (!result.success) {
       res.status(400).send(result.error);
       return;
     }
@@ -106,14 +123,17 @@ export const controlRejectFriendRequest = async (req: Request, res: Response): P
   }
 };
 
-export const controlRemoveFriend = async (req: Request, res: Response): Promise<void> => {
+export const controlRemoveFriend = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   try {
     const userId = (req as any).user.userId;
-    const {friendId} = req.body;
+    const { friendId } = req.body;
     const result = await removeFriend(userId, friendId);
-    if(!result.success){
+    if (!result.success) {
       res.status(400).send(result.error);
-      return
+      return;
     }
     res.status(201).send("friend successfully removed");
     return;

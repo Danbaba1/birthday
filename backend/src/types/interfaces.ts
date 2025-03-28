@@ -1,11 +1,14 @@
-import mongoose, { Document} from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 export interface IResult {
   success: boolean;
   error?: string;
+  userId?: string; // ✅ Allow userId in the response
 }
 
+
 export interface DBUser extends Document {
+  _id: string;
   firstName: string;
   lastName: string;
   username: string;
@@ -31,6 +34,7 @@ export interface DBUser extends Document {
 }
 
 export interface IUser {
+  _id: string;
   email: string;
   username: string;
   password: string;
