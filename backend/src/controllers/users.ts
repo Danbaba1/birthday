@@ -27,8 +27,18 @@ export const getOtherUserProfile = async (
 ): Promise<void> => {
   try {
     const userId = req.params.id;
+    const requestingUserId: string = (req as any).user.userId;
 
-    const user = await UserService.findUsersById(userId);
+    const requestingUser = await UserService.findUsersById(requestingUserId);
+    if (!requestingUser) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+    const isFriend: boolean = requestingUser?.friends.some(
+      (friend) => friend.toString() === userId
+    );
+
+    const user = await UserService.findUserProfileById(userId, isFriend);
 
     if (!user) {
       res.status(404).json({ error: "User not found" });
