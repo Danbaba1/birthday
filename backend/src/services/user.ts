@@ -14,10 +14,10 @@ export async function addUser(data: IUser): Promise<IResult> {
     const existingUsername = await User.findOne({ username: username });
     const existingEmail = await User.findOne({ email: email });
     if (existingUsername) {
-      return { success: false, error: "Username already exists"};
+      return { success: false, error: "Username already exists" };
     }
     if (existingEmail) {
-      return { success: false, error: "Email already exists"};
+      return { success: false, error: "Email already exists" };
     }
     const salt: any = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
