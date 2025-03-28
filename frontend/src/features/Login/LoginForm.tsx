@@ -21,7 +21,7 @@ const LoginForm = () => {
     await loginUser(data.email, data.password);
     toast.success("Login Successful!");
     reset();
-    navigate("/");
+    navigate("/members");
   };
 
   return (
