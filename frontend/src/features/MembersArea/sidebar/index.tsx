@@ -31,7 +31,7 @@ export default function Sidebar() {
 
       {openMenu ? (
         <div className="sidebar-content">
-          <Link to="/" className="link" id="home">
+          <Link to="/home" className="link" id="home">
             <div className="content-gap" onClick={closeMenu}>
               <GoHome className="mem-icons" />
               <p className="search-text">Home</p>
