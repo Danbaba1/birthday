@@ -59,7 +59,9 @@ export default function Sidebar() {
               <p className="search-text">Explore</p>
             </div>
           </Link>
-          <p className="log-out">Log Out</p>
+          <Link to="/login" className="link">
+            <p className="log-out">Log Out</p>
+          </Link>
         </div>
       ) : null}
     </div>
