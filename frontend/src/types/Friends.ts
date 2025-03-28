@@ -6,5 +6,6 @@ export interface Friend {
     dob?: string;
     location?: string;
     hobbies?: string;
+    profilePic?: string;
   }
   

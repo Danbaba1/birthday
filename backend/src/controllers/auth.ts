@@ -29,7 +29,6 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
 
-    // Find user by email only
     const user = await User.findOne({ email }) as { _id: string; password: string };
 
     if (!user) {
@@ -37,17 +36,14 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Check if password matches
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       res.status(400).json({ error: 'Invalid email or password' });
       return;
     }
 
-    // Generate JWT token
     const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
 
-    // Set Authorization headers
     res.setHeader('Authorization', `Bearer ${token}`);
     res.setHeader('User-Id', user._id);
 

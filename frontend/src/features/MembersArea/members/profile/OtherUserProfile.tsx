@@ -9,7 +9,7 @@ const OtherUserProfile = () => {
 
   useEffect(() => {
     if (userId) {
-      fetch(`/api/users/${userId}`)
+      fetch(`http://localhost:3000/api/users/${userId}`)
         .then((res) => res.json())
         .then((data) => setUserProfile(data))
         .catch((error) => console.error("Error fetching user profile:", error));

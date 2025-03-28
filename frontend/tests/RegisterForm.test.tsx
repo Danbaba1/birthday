@@ -3,10 +3,13 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import "@testing-library/jest-dom/vitest";
 import userEvent from "@testing-library/user-event";
 import RegisterForm from "../src/features/Register/components/RegisterForm";
+import { MemoryRouter } from "react-router-dom";
 
 const renderForm = () => {
-  render(<RegisterForm />);
-
+  render(
+  <MemoryRouter> 
+  <RegisterForm />;
+  </MemoryRouter> )
   return {
     waitForFormToLoad: () => screen.findByRole("form"),
     getInput: () => {
