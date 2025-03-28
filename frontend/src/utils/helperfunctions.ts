@@ -58,8 +58,8 @@ export const sortFriendsByNextBirthday= (friends:any[])=> {
 }
 
 export const getFirst3 = (array: any [])=> {
-  if(array.length<=3) return array;
+  if(array?.length<=3) return array;
 
-  const result = array.slice(0,3);
+  const result = array?.slice(0,3);
   return result;
 }

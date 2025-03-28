@@ -69,7 +69,7 @@ const ProfilePage = () => {
                   <Friends />
                 </div>
               </div>
-              <Link to="/" className="link">
+              <Link to="/editProfile" className="link">
                 <button className="edit-btn">Edit Profile</button>
               </Link>
             </>

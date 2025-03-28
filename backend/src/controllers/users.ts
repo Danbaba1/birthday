@@ -9,8 +9,8 @@ export const getAllUsers = async (_: Request, res: Response) => {
 
 export const getUserById = async (req: Request, res: Response) => {
   try {
-    const userId = (req as any).user.userId;
-    const user = await UserService.findUsersById(userId);
+    const myId = (req as any).user.userId;
+    const user = await UserService.findUsersById(myId);
     if (!user) {
       res.status(404).send("User not found");
       return;
