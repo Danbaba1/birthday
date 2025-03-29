@@ -24,6 +24,8 @@ const userSchema = new Schema<DBUser>({
   password: { type: String, required: true, minlength: 6 },
   dob: { type: Date },
   gender: { type: String, trim: true, enum: ["male", "female"] },
+  hobbies: {type: String, trim: true},
+  location: {type: String, trim: true},
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   notifications: [

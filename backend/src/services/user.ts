@@ -36,3 +36,31 @@ export async function addUser(data: IUser): Promise<IResult> {
     };
   }
 }
+
+export const updateUser = async (data: any, userId: string) => {
+  try {
+    const { firstName, lastName, gender, dob, hobbies, location } = data;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return { success: false, error: "User not found" };
+    }
+
+    // Update only if the field is provided
+    if (firstName !== undefined) user.firstName = firstName;
+    if (lastName !== undefined) user.lastName = lastName;
+    if (gender !== undefined) user.gender = gender;
+    if (dob !== undefined) user.dob = dob;
+    if (hobbies !== undefined) user.hobbies = hobbies;
+    if (location !== undefined) user.location = location;
+
+    await user.save();
+    return { success: true, message: "User updated successfully" };
+  } catch (error: unknown) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
+};
+

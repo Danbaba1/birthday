@@ -129,7 +129,7 @@ export const controlRemoveFriend = async (
 ): Promise<void> => {
   try {
     const userId = (req as any).user.userId;
-    const { friendId } = req.body;
+    const friendId: string  = req.params.id;
     const result = await removeFriend(userId, friendId);
     if (!result.success) {
       res.status(400).send(result.error);
