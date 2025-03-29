@@ -3,59 +3,58 @@ import axios from "axios";
 const token = localStorage.getItem("token");
 const config = {
   headers: {
-    Authorization: token ,
+    Authorization: token,
   },
 };
 
-
 const url = "http://localhost:3000/api";
 
-export const getNotifications = async ()=>{
+export const getNotifications = async () => {
   try {
-    const res = await axios.get(`${url}/notifications`,config); 
+    const res = await axios.get(`${url}/notifications`, config);
     return res.data;
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error.message);
-    throw new Error("Failed to fetch user"); 
+    throw new Error("Failed to fetch user");
   }
-}
+};
 
-export const deleteAllNotifications = async ()=>{
+export const deleteAllNotifications = async () => {
   try {
-    await axios.delete(`${url}/notifications`,config); 
+    await axios.delete(`${url}/notifications`, config);
     return true;
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error.message);
-    throw new Error("Failed to delete notification"); 
+    throw new Error("Failed to delete notification");
   }
-}
+};
 
-export const deleteNotification = async (id: number)=>{
+export const deleteNotification = async (id: number) => {
   try {
-    await axios.delete(`${url}/notifications/${id}`,config); 
+    await axios.delete(`${url}/notifications/${id}`, config);
     return true;
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error.message);
-    throw new Error("Failed to delete notification"); 
+    throw new Error("Failed to delete notification");
   }
-}
+};
 
-export const readNotification = async (id: number)=>{
+export const readNotification = async (id: number) => {
   try {
-    await axios.patch(`${url}/notifications/${id}`,config); 
+    await axios.patch(`${url}/notifications/${id}`, config);
     return true;
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error.message);
-    throw new Error("Failed to read notification"); 
+    throw new Error("Failed to read notification");
   }
-}
+};
 
-export const readAllNotifications = async ()=>{
+export const readAllNotifications = async () => {
   try {
-    await axios.patch(`${url}/notifications/`,config); 
+    await axios.patch(`${url}/notifications/`, config);
     return true;
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error.message);
-    throw new Error("Failed to read notifications"); 
+    throw new Error("Failed to read notifications");
   }
-}
+};

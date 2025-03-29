@@ -40,37 +40,76 @@ const ProfileForm = () => {
         <p className="message">Update your details.</p>
 
         <div className="form-group">
-          <label htmlFor="firstName" className="label">First Name</label>
-          <input {...register("firstName")} id="firstName" type="text" className="form-input" />
-          {errors.firstName && <p className="err">{errors.firstName.message}</p>}
+          <label htmlFor="firstName" className="label">
+            First Name
+          </label>
+          <input
+            {...register("firstName")}
+            id="firstName"
+            type="text"
+            className="form-input"
+          />
+          {errors.firstName && (
+            <p className="err">{errors.firstName.message}</p>
+          )}
         </div>
 
         <div className="form-group">
-          <label htmlFor="lastName" className="label">Last Name</label>
-          <input {...register("lastName")} id="lastName" type="text" className="form-input" />
+          <label htmlFor="lastName" className="label">
+            Last Name
+          </label>
+          <input
+            {...register("lastName")}
+            id="lastName"
+            type="text"
+            className="form-input"
+          />
           {errors.lastName && <p className="err">{errors.lastName.message}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="hobbies" className="label">Hobbies</label>
-          <input {...register("hobbies")} id="hobbies" type="text" className="form-input" />
+          <label htmlFor="hobbies" className="label">
+            Hobbies
+          </label>
+          <input
+            {...register("hobbies")}
+            id="hobbies"
+            type="text"
+            className="form-input"
+          />
           {errors.hobbies && <p className="err">{errors.hobbies.message}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="location" className="label">Location</label>
-          <input {...register("location")} id="location" type="text" className="form-input" />
+          <label htmlFor="location" className="label">
+            Location
+          </label>
+          <input
+            {...register("location")}
+            id="location"
+            type="text"
+            className="form-input"
+          />
           {errors.location && <p className="err">{errors.location.message}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="dob" className="label">Date of Birth</label>
-          <input {...register("dob")} id="dob" type="date" className="form-input" />
+          <label htmlFor="dob" className="label">
+            Date of Birth
+          </label>
+          <input
+            {...register("dob")}
+            id="dob"
+            type="date"
+            className="form-input"
+          />
           {errors.dob && <p className="err">{errors.dob.message}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="gender" className="label">Gender</label>
+          <label htmlFor="gender" className="label">
+            Gender
+          </label>
           <select {...register("gender")} id="gender" className="form-input">
             <option value="">Select Gender (optional)</option>
             <option value="male">Male</option>
@@ -100,9 +139,6 @@ const ProfileForm = () => {
 };
 
 export default ProfileForm;
-
-
-
 
 // const EditProfilePage: React.FC = () => {
 //   const [isEditing, setIsEditing] = useState(false);
