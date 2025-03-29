@@ -6,7 +6,7 @@
   background-color: rgb(66, 66, 66);
   padding: 10px;
   margin: auto;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .scroll-container::-webkit-scrollbar {
@@ -107,6 +107,7 @@
       font-size: 30px;
       font-weight: 600;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: white
     }
     h2 {
       font-size: 38px;

@@ -6,10 +6,17 @@ import "./profile.css";
 const OtherUserProfile = () => {
   const { userId } = useParams();
   const [userProfile, setUserProfile] = useState<Friend | null>(null);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:3000/api/users/${userId}`)
+      fetch(`http://localhost:3000/api/otherUsers/${userId}`, {
+        method: "GET",
+        headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      },
+      })
         .then((res) => res.json())
         .then((data) => setUserProfile(data))
         .catch((error) => console.error("Error fetching user profile:", error));
@@ -22,11 +29,6 @@ const OtherUserProfile = () => {
 
   return (
     <div className="profile-container p-4">
-      <img
-        src={userProfile.profilePic || "https://via.placeholder.com/120"}
-        alt="User Profile"
-        className="profile-img"
-      />
       <h2 className="text-lg font-bold">{userProfile.name}</h2>
       <p>Username: {userProfile.username}</p>
       <p>Email: {userProfile.email || "N/A"}</p>

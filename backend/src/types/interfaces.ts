@@ -17,6 +17,8 @@ export interface DBUser extends Document {
   password: string;
   dob: Date;
   gender: "male" | "female";
+  hobbies: string;
+  location: string;
   friends: mongoose.Types.ObjectId[];
   friendRequests: {
     userId: mongoose.Types.ObjectId;
