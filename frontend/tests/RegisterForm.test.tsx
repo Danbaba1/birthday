@@ -12,6 +12,7 @@ import {
 import "@testing-library/jest-dom/vitest";
 import userEvent from "@testing-library/user-event";
 import RegisterForm from "../src/features/Register/components/RegisterForm";
+import { server } from "./mocks/server";
 import { MemoryRouter } from "react-router-dom";
 
 const renderForm = () => {
