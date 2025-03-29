@@ -3,8 +3,9 @@ import "../features/MembersArea/members/profile/profile.css";
 // import { removeFriend, fetchFriends } from "../services/friendService";
 // import { toast } from "react-toastify";
 import { useFriends } from "../hooks/useFriends";
+import { Link } from "react-router-dom";
 
-const Friend = ({ id, username, firstName, lastName, onRemove }: any) => {
+const Friend = ({ _id, username, firstName, lastName, onRemove }: any) => {
   return (
     <div className="scroll-item">
       <div className="item-container">
@@ -14,8 +15,10 @@ const Friend = ({ id, username, firstName, lastName, onRemove }: any) => {
           <span>{lastName ? lastName: "" }</span>
         </div>
         <div>
-          <button className="red-btn" onClick={() => onRemove(id)}>Remove</button>
-          <button className="green-btn">View</button>
+          <button className="red-btn" onClick={() => onRemove(_id)}>Remove</button>
+          <Link to={`/profile/${_id}`}>
+            <button className="green-btn">View</button>
+          </Link>
         </div>
       </div>
     </div>

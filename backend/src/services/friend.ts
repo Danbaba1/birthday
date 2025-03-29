@@ -4,7 +4,7 @@ import { sendNotification } from "./notification";
 export const sendFriendRequest = async (senderId: any, receiverId: any) => {
   const sender = await User.findById(senderId);
   const receiver = await User.findById(receiverId);
-
+  if (senderId===receiverId)return {success:false, error: "can't send a friend request to your self"}
   if (!sender || !receiver) {
     return { success: false, error: "User not found" };
   }

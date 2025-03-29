@@ -9,7 +9,7 @@ const schema = z.object({
   .union([z.string(), z.date()]) 
   .refine((val) => !val || !isNaN(new Date(val).getTime()), "Invalid date format")
   .optional(),
-  gender: z.enum(["Male", "Female"]).optional(),
+  gender: z.enum(["male", "female"]).optional(),
 });
 
 export type ProfileFormData = z.infer<typeof schema>;

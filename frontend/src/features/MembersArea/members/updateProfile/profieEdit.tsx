@@ -3,7 +3,7 @@
 // import "./profileEdit.css";
 // import { ProfileData, ProfileFormProps } from "../../../../types/profileTypes";
 
-import "../Register/form.css";
+import "../../../Register/form.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast, ToastContainer } from "react-toastify";
@@ -23,94 +23,64 @@ const ProfileForm = () => {
   } = useForm<ProfileFormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: ProfileFormData) => {
-    await submitEdit(data);
-    toast.success("Submitted Successfully!");
-    reset();
-    navigate("/profile");
+    try {
+      await submitEdit(data);
+      toast.success("Submitted Successfully!");
+      reset();
+      navigate("/profile");
+    } catch (error) {
+      toast.error("Submission failed. Please try again.");
+    }
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="form" role="form">
         <p className="title">Edit Profile</p>
-        <p className="message">update your details.</p>
+        <p className="message">Update your details.</p>
 
         <div className="form-group">
-          <label htmlFor="firstName" className="label">
-            First Name
-          </label>
-          <input
-            {...register("firstName")}
-            id="firstName"
-            type="text"
-            className="form-input"
-          />
-          {errors.firstName && (
-            <p className="err">{errors.firstName.message}</p>
-          )}
+          <label htmlFor="firstName" className="label">First Name</label>
+          <input {...register("firstName")} id="firstName" type="text" className="form-input" />
+          {errors.firstName && <p className="err">{errors.firstName.message}</p>}
         </div>
+
         <div className="form-group">
-          <label htmlFor="lastName" className="label">
-            Last Name
-          </label>
-          <input
-            {...register("lastName")}
-            id="lastName"
-            type="text"
-            className="form-input"
-          />
+          <label htmlFor="lastName" className="label">Last Name</label>
+          <input {...register("lastName")} id="lastName" type="text" className="form-input" />
           {errors.lastName && <p className="err">{errors.lastName.message}</p>}
         </div>
+
         <div className="form-group">
-          <label htmlFor="hobbies" className="label">
-            Hobbies
-          </label>
-          <input
-            {...register("hobbies")}
-            id="hobbies"
-            type="text"
-            className="form-input"
-          />
+          <label htmlFor="hobbies" className="label">Hobbies</label>
+          <input {...register("hobbies")} id="hobbies" type="text" className="form-input" />
           {errors.hobbies && <p className="err">{errors.hobbies.message}</p>}
         </div>
+
         <div className="form-group">
-          <label htmlFor="location" className="label">
-            First Name
-          </label>
-          <input
-            {...register("location")}
-            id="location"
-            type="text"
-            className="form-input"
-          />
+          <label htmlFor="location" className="label">Location</label>
+          <input {...register("location")} id="location" type="text" className="form-input" />
           {errors.location && <p className="err">{errors.location.message}</p>}
         </div>
+
         <div className="form-group">
-          <label htmlFor="dob" className="label">
-            First Name
-          </label>
-          <input
-            {...register("dob")}
-            id="dob"
-            type="date"
-            className="form-input"
-          />
+          <label htmlFor="dob" className="label">Date of Birth</label>
+          <input {...register("dob")} id="dob" type="date" className="form-input" />
           {errors.dob && <p className="err">{errors.dob.message}</p>}
         </div>
+
         <div className="form-group">
-          <label htmlFor="gender" className="label">
-            Gender
-          </label>
+          <label htmlFor="gender" className="label">Gender</label>
           <select {...register("gender")} id="gender" className="form-input">
             <option value="">Select Gender (optional)</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
           </select>
           {errors.gender && <p className="err">{errors.gender.message}</p>}
         </div>
+
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "submit"}
+          {isSubmitting ? "Submitting..." : "Submit"}
         </button>
       </form>
 
@@ -130,6 +100,9 @@ const ProfileForm = () => {
 };
 
 export default ProfileForm;
+
+
+
 
 // const EditProfilePage: React.FC = () => {
 //   const [isEditing, setIsEditing] = useState(false);

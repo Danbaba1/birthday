@@ -5,6 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { GoHome } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Logout from "../../../components/LogOut";
 import "./sidebar.css";
 
 export default function Sidebar() {
@@ -31,7 +32,7 @@ export default function Sidebar() {
 
       {openMenu ? (
         <div className="sidebar-content">
-          <Link to="/home" className="link" id="home">
+          <Link to="/" className="link" id="home">
             <div className="content-gap" onClick={closeMenu}>
               <GoHome className="mem-icons" />
               <p className="search-text">Home</p>
@@ -49,10 +50,12 @@ export default function Sidebar() {
               <p className="search-text">Search</p>
             </div>
           </Link>
-          <div className="content-gap" onClick={closeMenu}>
-            <IoIosNotificationsOutline className="mem-icons" />
-            <p className="search-text">Notifications</p>
-          </div>
+          <Link to="/notifications" className="link">
+            <div className="content-gap" onClick={closeMenu}>
+              <IoIosNotificationsOutline className="mem-icons" />
+              <p className="search-text">Notifications</p>
+            </div>
+          </Link>
           <Link to="/explore" className="link">
             <div className="content-gap" onClick={closeMenu}>
               <MdOutlineExplore className="mem-icons" />
@@ -60,7 +63,9 @@ export default function Sidebar() {
             </div>
           </Link>
           <Link to="/login" className="link">
-            <p className="log-out">Log Out</p>
+            <div className="content-gap" onClick={closeMenu}>
+              <Logout/>
+            </div>
           </Link>
         </div>
       ) : null}

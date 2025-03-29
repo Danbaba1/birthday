@@ -24,22 +24,28 @@ export const getInitials = (user:any)=>{
   return user.firstName.slice(0,1).toUpperCase()+user.lastName.slice(0,1).toUpperCase();
 }
 
-export const getNextBirthday= (birthDate: Date)=>{
+export const getNextBirthday = (birthDate: Date | string) => {
+  if (!birthDate) return "Invalid date";
+
+  const parsedDate = new Date(birthDate);
+  if (isNaN(parsedDate.getTime())) return "Invalid date";
+
   const today = new Date();
-  let nextBirthday = new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+  let nextBirthday = new Date(today.getFullYear(), parsedDate.getMonth(), parsedDate.getDate());
 
   if (nextBirthday < today) {
-      nextBirthday = new Date(today.getFullYear() + 1, birthDate.getMonth(), birthDate.getDate());
+    nextBirthday = new Date(today.getFullYear() + 1, parsedDate.getMonth(), parsedDate.getDate());
   }
 
   const options: Intl.DateTimeFormatOptions = {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
+    weekday: "long",
+    day: "numeric",
+    month: "long",
   };
 
   return nextBirthday.toLocaleDateString("en-US", options);
-}
+};
+
 
 export const sortFriendsByNextBirthday= (friends:any[])=> {
   if (!friends.length) return [];
