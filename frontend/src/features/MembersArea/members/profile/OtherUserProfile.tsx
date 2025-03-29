@@ -13,9 +13,9 @@ const OtherUserProfile = () => {
       fetch(`http://localhost:3000/api/otherUsers/${userId}`, {
         method: "GET",
         headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
       })
         .then((res) => res.json())
         .then((data) => setUserProfile(data))

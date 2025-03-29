@@ -24,7 +24,7 @@ const AutoLogout = () => {
 };
 
 // Function to Check Token Expiry
-const isTokenExpired = (token:any) => {
+const isTokenExpired = (token: any) => {
   try {
     const decoded = JSON.parse(atob(token.split(".")[1]));
     return decoded.exp * 1000 < Date.now();

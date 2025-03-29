@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { 
-  deleteAllNotifications, 
-  deleteNotification, 
-  getNotifications, 
-  readAllNotifications, 
-  readNotification 
+import {
+  deleteAllNotifications,
+  deleteNotification,
+  getNotifications,
+  readAllNotifications,
+  readNotification,
 } from "../services/notificationService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -19,7 +19,7 @@ export const useNotifications = () => {
     async function fetchNotifications() {
       try {
         const Data = await getNotifications();
-        setNotifications(Data ?? []); 
+        setNotifications(Data ?? []);
       } catch (err) {
         setError("Error fetching user data.");
       } finally {
@@ -39,11 +39,13 @@ export const useNotifications = () => {
 
       setNotifications((prev) =>
         prev.map((notif) =>
-          notif.id === id ? { ...notif, isRead: true } : notif
-        )
+          notif.id === id ? { ...notif, isRead: true } : notif,
+        ),
       );
 
-      navigate(type === "ReceivedRequest" ? "/profile" : `/profile/${relatedUser}`);
+      navigate(
+        type === "ReceivedRequest" ? "/profile" : `/profile/${relatedUser}`,
+      );
 
       toast.success("Notification marked as read!");
     } catch (error: any) {
@@ -56,7 +58,9 @@ export const useNotifications = () => {
     try {
       await readAllNotifications();
 
-      setNotifications((prev) => prev.map((notif) => ({ ...notif, isRead: true })));
+      setNotifications((prev) =>
+        prev.map((notif) => ({ ...notif, isRead: true })),
+      );
 
       toast.success("All notifications marked as read!");
     } catch (error: any) {
@@ -81,7 +85,7 @@ export const useNotifications = () => {
     try {
       await deleteNotification(id);
 
-      setNotifications((prev) => prev.filter((notif) => notif.id !== id)); 
+      setNotifications((prev) => prev.filter((notif) => notif.id !== id));
       toast.success("Notification deleted successfully!");
     } catch (error: any) {
       setError(error.message || "An error occurred");
